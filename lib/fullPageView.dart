@@ -27,19 +27,27 @@ class FullPageView extends StatefulWidget {
   /// Status bar color in full view of story
   final Color storyStatusBarColor;
 
-  FullPageView({
-    Key key,
-    @required this.storiesMapList,
-    @required this.storyNumber,
-    this.fullPagetitleStyle,
-    this.displayProgress,
-    this.fullpageVisitedColor,
-    this.fullpageUnvisitedColor,
-    this.showThumbnailOnFullPage,
-    this.fullpageThumbnailSize,
-    this.showStoryNameOnFullPage,
-    this.storyStatusBarColor,
-  }) : super(key: key);
+  /// on Story Opened callback
+  final Function storyOpend;
+
+  /// on user avatar tapped callback
+  final Function onUserTaped;
+
+  FullPageView(
+      {Key key,
+      @required this.storiesMapList,
+      @required this.storyNumber,
+      this.fullPagetitleStyle,
+      this.displayProgress,
+      this.fullpageVisitedColor,
+      this.fullpageUnvisitedColor,
+      this.showThumbnailOnFullPage,
+      this.fullpageThumbnailSize,
+      this.showStoryNameOnFullPage,
+      this.storyStatusBarColor,
+      this.storyOpend,
+      this.onUserTaped})
+      : super(key: key);
   @override
   FullPageViewState createState() => FullPageViewState();
 }
@@ -97,7 +105,7 @@ class FullPageViewState extends State<FullPageView> {
     fullpageThumbnailSize = widget.fullpageThumbnailSize;
     showStoryNameOnFullPage = widget.showStoryNameOnFullPage ?? true;
     storyStatusBarColor = widget.storyStatusBarColor;
-
+    widget.storyOpend();
     super.initState();
   }
 
@@ -205,12 +213,14 @@ class FullPageViewState extends State<FullPageView> {
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: (showThumbnailOnFullPage == null ||
                             showThumbnailOnFullPage)
-                        ? Image(
-                            width: fullpageThumbnailSize ?? 25,
-                            height: fullpageThumbnailSize ?? 25,
-                            image: storiesMapList[
-                                    getStoryIndex(listLengths, selectedIndex)]
-                                .thumbnail,
+                        ? InkWell(
+                            onTap: widget.onUserTaped,
+                            child: CircleAvatar(
+                              radius: fullpageThumbnailSize ?? 25,
+                              backgroundImage: storiesMapList[
+                                      getStoryIndex(listLengths, selectedIndex)]
+                                  .thumbnail,
+                            ),
                           )
                         : Center(),
                   ),

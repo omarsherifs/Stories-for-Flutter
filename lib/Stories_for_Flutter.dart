@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Stories extends StatelessWidget {
   /// Recieves the list of stories to display
-  final List<StoryItem> storyItemList;
+  final storyItemList;
 
   /// Text style below the story circle
   final TextStyle storyCircleTextStyle;
