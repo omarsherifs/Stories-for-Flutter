@@ -116,7 +116,15 @@ class StoryItem {
   /// List of pages to display as stories under this story
   List<Scaffold> stories;
 
+  Function onUserTapped;
+
+  List <Function> onStoryOpened;
+
   /// Add a story
   StoryItem(
-      {@required this.name, @required this.thumbnail, @required this.stories});
+      {@required this.name,
+      @required this.thumbnail,
+      @required this.stories,
+      @required this.onStoryOpened,
+      @required this.onUserTapped});
 }

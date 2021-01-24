@@ -37,11 +37,6 @@ class StoryCircle extends StatelessWidget {
   /// Status bar color in full view of story
   final Color storyStatusBarColor;
 
-  /// callback on open this page
-  final Function onOpenStory;
-
-  /// callback on tapping in user icon
-  final Function onUserTaped;
   StoryCircle({
     this.story,
     this.selectedIndex,
@@ -60,8 +55,6 @@ class StoryCircle extends StatelessWidget {
     this.fullpageThumbnailSize,
     this.showStoryNameOnFullPage,
     this.storyStatusBarColor,
-    this.onOpenStory,
-    this.onUserTaped
   });
   @override
   Widget build(BuildContext context) {
@@ -100,8 +93,6 @@ class StoryCircle extends StatelessWidget {
                     showStoryNameOnFullPage: showStoryNameOnFullPage,
                     showThumbnailOnFullPage: showThumbnailOnFullPage,
                     storyStatusBarColor: storyStatusBarColor,
-                    storyOpend:onOpenStory,
-                    onUserTaped:onUserTaped ,
                   ),
                 ),
               );

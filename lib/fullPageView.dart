@@ -30,9 +30,6 @@ class FullPageView extends StatefulWidget {
   /// on Story Opened callback
   final Function storyOpend;
 
-  /// on user avatar tapped callback
-  final Function onUserTaped;
-
   FullPageView(
       {Key key,
       @required this.storiesMapList,
@@ -45,8 +42,7 @@ class FullPageView extends StatefulWidget {
       this.fullpageThumbnailSize,
       this.showStoryNameOnFullPage,
       this.storyStatusBarColor,
-      this.storyOpend,
-      this.onUserTaped})
+      this.storyOpend})
       : super(key: key);
   @override
   FullPageViewState createState() => FullPageViewState();
@@ -105,7 +101,7 @@ class FullPageViewState extends State<FullPageView> {
     fullpageThumbnailSize = widget.fullpageThumbnailSize;
     showStoryNameOnFullPage = widget.showStoryNameOnFullPage ?? true;
     storyStatusBarColor = widget.storyStatusBarColor;
-    widget.storyOpend();
+    storiesMapList[selectedIndex].onStoryOpened[0]();
     super.initState();
   }
 
@@ -119,6 +115,7 @@ class FullPageViewState extends State<FullPageView> {
             onPageChanged: (page) {
               setState(() {
                 selectedIndex = page;
+
               });
             },
             controller: _pageController,
@@ -214,7 +211,9 @@ class FullPageViewState extends State<FullPageView> {
                     child: (showThumbnailOnFullPage == null ||
                             showThumbnailOnFullPage)
                         ? InkWell(
-                            onTap: widget.onUserTaped,
+                            onTap: widget.storiesMapList[
+                                    getStoryIndex(listLengths, selectedIndex)]
+                                .onUserTapped(),
                             child: CircleAvatar(
                               radius: fullpageThumbnailSize ?? 25,
                               backgroundImage: storiesMapList[
